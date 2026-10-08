@@ -1,0 +1,395 @@
+/* ============================================================
+   SHARED 3D ANIMATION SYSTEM
+   ============================================================ */
+
+.perspective-scene {
+  perspective: 1200px;
+  perspective-origin: 50% 40%;
+  transform-style: preserve-3d;
+}
+
+.tilt-3d {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: box-shadow 0.35s var(--ease-smooth);
+}
+
+.tilt-3d__inner {
+  transform-style: preserve-3d;
+  height: 100%;
+}
+
+.tilt-3d__shine {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--shine-x, 50%) var(--shine-y, 50%),
+    rgba(251, 243, 224, 0.22) 0%,
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 2;
+  mix-blend-mode: soft-light;
+}
+
+.tilt-3d:hover .tilt-3d__shine,
+.tilt-3d.is-tilting .tilt-3d__shine {
+  opacity: 1;
+}
+
+/* Floating 3D icon badge — always fully visible */
+.icon-3d {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #8B5CF6 0%, #10B981 100%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.28);
+  color: var(--color-light-text);
+  position: relative;
+  flex-shrink: 0;
+  overflow: visible;
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+.icon-3d--sm {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+}
+
+.icon-3d--lg {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+}
+
+.icon-3d > *,
+.icon-3d svg {
+  display: block !important;
+  position: relative;
+  z-index: 2;
+  overflow: visible !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  color: var(--color-light-text) !important;
+  stroke: var(--color-light-text);
+  flex-shrink: 0;
+}
+
+/* 3D lift cards / interactive surfaces */
+.lift-3d {
+  transform-style: preserve-3d;
+  transition:
+    transform 0.4s var(--ease-spring),
+    box-shadow 0.4s var(--ease-smooth),
+    border-color 0.35s ease;
+}
+
+.lift-3d:hover {
+  transform: translateY(-8px) rotateX(4deg) scale(1.015);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--color-border-hover);
+}
+
+/* Section heading 3D entrance helper */
+.heading-3d {
+  transform-style: preserve-3d;
+}
+
+/* Floating ambient orbs (subtle depth) */
+.orb-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.35;
+  animation: orbFloat 12s ease-in-out infinite;
+}
+
+.orb--1 {
+  width: 280px;
+  height: 280px;
+  background: rgba(37, 42, 74, 0.08);
+  top: -60px;
+  right: -40px;
+  animation-delay: 0s;
+}
+
+.orb--2 {
+  width: 200px;
+  height: 200px;
+  background: rgba(43, 46, 82, 0.06);
+  bottom: 10%;
+  left: -50px;
+  animation-delay: -4s;
+}
+
+.orb--3 {
+  width: 160px;
+  height: 160px;
+  background: rgba(37, 42, 74, 0.05);
+  top: 40%;
+  right: 15%;
+  animation-delay: -7s;
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  33% { transform: translate3d(18px, -22px, 20px) scale(1.05); }
+  66% { transform: translate3d(-14px, 16px, -10px) scale(0.96); }
+}
+
+/* 3D button press */
+.btn-3d {
+  transform-style: preserve-3d;
+  transition:
+    transform 0.35s var(--ease-spring),
+    box-shadow 0.35s var(--ease-smooth) !important;
+}
+
+.btn-3d:hover {
+  transform: translateY(-3px) rotateX(8deg);
+  box-shadow: 0 12px 28px rgba(37, 42, 74, 0.22) !important;
+}
+
+.btn-3d:active {
+  transform: translateY(0) rotateX(2deg) scale(0.98);
+}
+
+/* Flip / depth on list rows */
+.row-3d {
+  transform-style: preserve-3d;
+  transition:
+    transform 0.4s var(--ease-spring),
+    background 0.3s ease,
+    padding-left 0.35s var(--ease-smooth),
+    box-shadow 0.35s ease;
+}
+
+.row-3d:hover {
+  transform: translateX(6px) translateZ(12px) rotateY(-2deg);
+  background: rgba(37, 42, 74, 0.03);
+}
+
+/* Skill tile 3D */
+.skill-tile.skill-tile--3d {
+  transform-style: preserve-3d;
+  transition:
+    transform 0.4s var(--ease-spring),
+    box-shadow 0.35s ease,
+    background 0.3s ease,
+    border-color 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.skill-tile.skill-tile--3d:hover,
+.skill-tile.skill-tile--3d.active {
+  transform: translateY(-10px) rotateX(10deg) rotateY(-6deg) scale(1.04);
+  box-shadow:
+    0 22px 40px rgba(37, 42, 74, 0.16),
+    0 6px 0 rgba(37, 42, 74, 0.05);
+  z-index: 2;
+}
+
+.skill-tile.skill-tile--3d .skill-tile__abbr {
+  transition: transform 0.4s var(--ease-spring);
+}
+
+.skill-tile.skill-tile--3d:hover .skill-tile__abbr,
+.skill-tile.skill-tile--3d.active .skill-tile__abbr {
+  transform: translateZ(24px);
+}
+
+/* Accordion panel 3D */
+.accordion-panel.accordion-panel--3d {
+  transform-style: preserve-3d;
+  transition:
+    flex 0.55s cubic-bezier(0.25, 1, 0.35, 1),
+    transform 0.45s var(--ease-spring),
+    background var(--duration-base),
+    border-color var(--duration-base),
+    box-shadow 0.4s ease;
+}
+
+.accordion-panel.accordion-panel--3d:hover:not(.active) {
+  transform: translateY(-6px) rotateY(-3deg);
+}
+
+.accordion-panel.accordion-panel--3d.active {
+  transform: translateY(-4px) rotateY(0deg);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Experience card 3D */
+.exp-card.exp-card--3d {
+  transform-style: preserve-3d;
+  transition:
+    transform 0.45s var(--ease-spring),
+    background 0.3s ease,
+    padding-left 0.35s ease;
+  cursor: pointer;
+}
+
+.exp-card.exp-card--3d:hover,
+.exp-card.exp-card--3d:focus-within {
+  transform: translateX(4px) translateZ(8px);
+}
+
+/* Cert / edu 3D */
+.cert-item.cert-item--3d,
+.edu-item.edu-item--3d {
+  transform-style: preserve-3d;
+  transition:
+    transform 0.4s var(--ease-spring),
+    background 0.3s ease,
+    box-shadow 0.35s ease,
+    border-color 0.3s ease;
+}
+
+.cert-item.cert-item--3d:hover,
+.cert-item.cert-item--3d.active,
+.edu-item.edu-item--3d:hover {
+  transform: translateY(-4px) rotateX(3deg) translateZ(10px);
+  box-shadow: 0 16px 32px rgba(37, 42, 74, 0.1);
+}
+
+/* Navbar link 3D */
+.navbar__link.navbar__link--3d {
+  transform-style: preserve-3d;
+  transition: transform 0.3s var(--ease-spring), color 0.25s ease;
+}
+
+.navbar__link.navbar__link--3d:hover {
+  transform: translateY(-2px) rotateX(8deg);
+}
+
+/* Hero floating icons strip */
+.hero__icon-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem 1.25rem;
+  margin-top: 0.25rem;
+}
+
+.hero__stat.hero__stat--3d {
+  transform-style: preserve-3d;
+  transition: transform 0.4s var(--ease-spring);
+  padding: 0.5rem 0.75rem;
+  border-radius: 12px;
+}
+
+.hero__stat.hero__stat--3d:hover {
+  transform: translateY(-6px) rotateX(12deg) scale(1.04);
+  background: rgba(37, 42, 74, 0.04);
+}
+
+/* Contact CTA 3D */
+.contact__cta-box.contact__cta-box--3d {
+  transform-style: preserve-3d;
+  transition: transform 0.45s var(--ease-spring), box-shadow 0.4s ease;
+}
+
+.contact__cta-box.contact__cta-box--3d:hover {
+  transform: translateY(-8px) rotateX(4deg) rotateY(-3deg);
+  box-shadow: var(--shadow-hover);
+}
+
+.availability-card {
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(160deg, var(--color-highlight) 0%, var(--color-card) 55%, var(--color-background) 100%);
+  transform-style: preserve-3d;
+  box-shadow:
+    0 10px 26px rgba(37, 42, 74, 0.05),
+    inset 0 1px 0 rgba(251, 243, 224, 0.7);
+  transition: transform 0.4s var(--ease-spring), box-shadow 0.35s ease;
+}
+
+.availability-card:hover {
+  transform: translateY(-4px) rotateX(3deg);
+  box-shadow: 0 18px 36px rgba(37, 42, 74, 0.1);
+}
+
+.availability-card__pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-navy);
+  box-shadow: 0 0 6px rgba(37, 42, 74, 0.4);
+  display: inline-block;
+  flex-shrink: 0;
+  animation: pulseDot 2s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.35); opacity: 0.7; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb,
+  .availability-card__pulse,
+  .icon-3d,
+  .lift-3d,
+  .tilt-3d,
+  .skill-tile--3d,
+  .btn-3d,
+  .row-3d {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .row-3d:hover {
+    transform: none;
+  }
+
+  .skill-tile.skill-tile--3d:hover,
+  .skill-tile.skill-tile--3d.active {
+    transform: translateY(-4px) scale(1.02);
+  }
+
+  .accordion-panel.accordion-panel--3d:hover:not(.active),
+  .accordion-panel.accordion-panel--3d.active {
+    transform: none;
+  }
+
+  .tilt-3d,
+  .tilt-3d:hover,
+  .lift-3d:hover,
+  .exp-card--3d:hover {
+    transform: none !important;
+  }
+
+  .tilt-3d__shine {
+    display: none;
+  }
+}
+
+@media (hover: none) {
+  .tilt-3d:hover,
+  .lift-3d:hover,
+  .surface-card:hover,
+  .row-3d:hover {
+    transform: none;
+  }
+}

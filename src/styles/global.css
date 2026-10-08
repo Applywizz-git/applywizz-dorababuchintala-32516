@@ -1,0 +1,422 @@
+/* ============================================================
+   GLOBAL DESIGN SYSTEM — DISTINCTIVE MODERN PALETTE
+   Reference: Plum + Terracotta + Sage + Warm Stone
+   ============================================================ */
+
+:root {
+  /* Primary color system — new distinct palette */
+  --color-navy: #171A2D;
+  --color-navy-secondary: #2D355F;
+  --color-value: #474B65;
+  --color-body: #3E4464;
+  --color-muted: #6C7290;
+
+  --color-background: #F5FBF8;
+  --color-card: #FDFFFE;
+  --color-surface: #EBF7F3;
+  --color-highlight: #E6F4F0;
+
+  --color-accent: #8B5CF6;
+  --color-accent-strong: #6D28D9;
+  --color-accent-soft: #EDE9FE;
+  --color-secondary: #10B981;
+  --color-secondary-soft: #D1FAE5;
+  --color-warm: #059669;
+  --color-warm-soft: #ECFDF5;
+  --color-violet: #10B981;
+  --color-violet-soft: #D1FAE5;
+
+  --color-light-text: #F9FAFF;
+
+  --color-border: rgba(23, 26, 45, 0.12);
+  --color-border-hover: rgba(23, 26, 45, 0.25);
+
+  --color-timeline: rgba(23, 26, 45, 0.18);
+
+  --shadow-card: 0 12px 30px rgba(23, 26, 45, 0.08);
+  --shadow-id: 0 20px 45px rgba(23, 26, 45, 0.12);
+  --shadow-hover: 0 24px 50px rgba(23, 26, 45, 0.14);
+
+  /* Legacy variable mappings for system compatibility */
+  --bg-primary: var(--color-background);
+  --bg-secondary: var(--color-surface);
+  --bg-card: var(--color-card);
+  --bg-card-hover: var(--color-surface);
+
+  --text-primary: var(--color-navy);
+  --text-secondary: var(--color-body);
+  --text-muted: var(--color-muted);
+  --text-value: var(--color-value);
+  --text-light: var(--color-muted);
+  --text-on-dark: var(--color-light-text);
+
+  --border-color: var(--color-border);
+  --border-light: var(--color-border);
+  --border-dark: var(--color-navy);
+
+  --accent-warm: var(--color-navy);
+  --accent-navy: var(--color-navy);
+
+  /* Typography */
+  --font-sans: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'DM Serif Display', Georgia, serif;
+  --font-mono: 'DM Mono', monospace;
+
+  /* Spacing scale */
+  --sp-xs: 0.25rem;
+  --sp-sm: 0.5rem;
+  --sp-md: 1rem;
+  --sp-lg: 1.5rem;
+  --sp-xl: 2rem;
+  --sp-2xl: 3rem;
+  --sp-3xl: 4rem;
+  --sp-4xl: 6rem;
+  --sp-5xl: 8rem;
+
+  /* Section padding — fluid across devices */
+  --section-pad-y: clamp(3.5rem, 8vw, 6.5rem);
+  --section-pad-x: clamp(1.15rem, 4.5vw, 5vw);
+  --nav-height: 68px;
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 200ms;
+  --duration-base: 350ms;
+  --duration-slow: 600ms;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(37, 42, 74, 0.05);
+  --shadow-md: var(--shadow-card);
+  --shadow-lg: var(--shadow-id);
+  --shadow-xl: var(--shadow-hover);
+}
+
+/* ---- Reset ---- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--nav-height) + 1.25rem);
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 12% 0%, rgba(255, 125, 90, 0.14) 0%, transparent 52%),
+    radial-gradient(ellipse 70% 45% at 88% 18%, rgba(31, 183, 165, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 62% 42% at 55% 70%, rgba(122, 92, 255, 0.10) 0%, transparent 48%);
+  background-attachment: fixed;
+  color: var(--color-navy);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  min-width: 0;
+}
+
+body.nav-lock {
+  overflow: hidden;
+  touch-action: none;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Inline icons — size via props; avoid CSS stroke overrides that clip paths */
+.hero__btn svg,
+.contact__btn svg,
+.navbar__resume svg,
+.exp-card__achievement svg,
+.exp-card__tag svg,
+.exp-card__loc svg,
+.edu-item__location svg,
+.edu-item__field-tag svg,
+.about__id-location svg,
+.about__id-back-item svg,
+.about__id-flip-hint svg,
+.about__id-back-cta svg,
+.cert-card__footer svg,
+.footer__email svg,
+.accordion-panel__metric-icon svg,
+.skills__filter-pill svg,
+.skills__filter-icon svg {
+  flex-shrink: 0;
+  overflow: visible;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font-sans);
+  border: none;
+  background: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* ---- Typography Utilities ---- */
+.heading-editorial {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--color-navy);
+}
+
+.heading-editorial em,
+.heading-editorial i {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-accent-strong);
+}
+
+.section-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.body-text {
+  font-family: var(--font-sans);
+  font-size: 0.98rem;
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--color-body);
+}
+
+/* ---- Layout Utilities ---- */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--section-pad-x);
+}
+
+.section {
+  padding: var(--section-pad-y) var(--section-pad-x);
+}
+
+.app-shell {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.7s var(--ease-smooth), transform 0.7s var(--ease-smooth);
+  pointer-events: none;
+}
+
+.app-shell--ready {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Shared elevated card surface */
+.surface-card {
+  background: linear-gradient(165deg, var(--color-highlight) 0%, var(--color-card) 55%, var(--color-surface) 100%);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  box-shadow:
+    0 10px 28px rgba(37, 42, 74, 0.06),
+    inset 0 1px 0 rgba(251, 243, 224, 0.8);
+  transition:
+    transform 0.4s var(--ease-spring),
+    box-shadow 0.35s var(--ease-smooth),
+    border-color 0.3s ease;
+}
+
+.surface-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-border-hover);
+  box-shadow:
+    0 22px 48px rgba(37, 42, 74, 0.12),
+    inset 0 1px 0 rgba(251, 243, 224, 0.9);
+}
+
+/* ---- Buttons ---- */
+/* Primary Button */
+.btn-primary, .btn-navy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.4rem;
+  border-radius: var(--radius-full);
+  background-color: var(--color-navy);
+  color: var(--color-light-text);
+  border: 1px solid var(--color-navy);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: all var(--duration-base) var(--ease-smooth);
+  cursor: pointer;
+}
+
+.btn-primary:hover, .btn-navy:hover {
+  background-color: var(--color-navy-secondary);
+  border-color: var(--color-navy-secondary);
+  box-shadow: 0 4px 14px rgba(37, 42, 74, 0.2);
+}
+
+/* Secondary Button */
+.btn-secondary, .pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.3rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(37, 42, 74, 0.28);
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--color-navy);
+  transition: all var(--duration-base) var(--ease-smooth);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-secondary:hover, .pill-btn:hover {
+  background: var(--color-navy);
+  color: var(--color-light-text);
+  border-color: var(--color-navy);
+}
+
+.pill-btn.active {
+  background: var(--color-navy);
+  color: var(--color-light-text);
+  border-color: var(--color-navy);
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(37, 42, 74, 0.20);
+  border-radius: 3px;
+}
+
+/* ---- Focus States ---- */
+:focus-visible {
+  outline: 2px solid var(--color-navy);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---- 3D Scene Helpers ---- */
+main {
+  perspective: 1400px;
+  transform-style: preserve-3d;
+}
+
+section {
+  position: relative;
+  isolation: isolate;
+}
+
+/* ---- Reduced Motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---- Responsive base ---- */
+@media (max-width: 1024px) {
+  :root {
+    --nav-height: 64px;
+  }
+
+  .heading-editorial {
+    font-size: clamp(2.2rem, 7vw, 4rem);
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  main {
+    perspective: none;
+  }
+
+  .surface-card:hover {
+    transform: translateY(-3px);
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 15px;
+  }
+
+  .btn-primary,
+  .btn-navy,
+  .btn-secondary,
+  .pill-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Safe area insets (notched phones) */
+@supports (padding: max(0px)) {
+  :root {
+    --section-pad-x: max(clamp(1.15rem, 4.5vw, 5vw), env(safe-area-inset-left), env(safe-area-inset-right));
+  }
+}
+
+/* ---- Divider ---- */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--color-border);
+}
+
+/* ---- Number label ---- */
+.num-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-muted);
+  letter-spacing: 0.05em;
+}

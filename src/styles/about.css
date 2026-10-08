@@ -1,0 +1,594 @@
+/* ============================================================
+   ABOUT SECTION — 3-Column Single Row Layout with Physical Lanyard Badge
+   Reference Navy & Cream Palette
+   ============================================================ */
+
+.about {
+  background: linear-gradient(180deg, #F8F3F0 0%, #F7E9E2 100%);
+  padding: var(--section-pad-y) var(--section-pad-x);
+  border-top: 1px solid var(--color-border);
+}
+
+.about__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 320px 1.1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* ---- Column 1: Left Bio & Intro ---- */
+.about__col-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.about__heading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.about__heading h2 {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: clamp(2.5rem, 4.2vw, 4.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--color-navy);
+}
+
+.about__heading h2 em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-accent-strong);
+}
+
+.about__intro {
+  font-family: var(--font-sans);
+  font-size: 0.98rem;
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--color-body);
+}
+
+.about__quote {
+  padding: 1.35rem 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: linear-gradient(165deg, var(--color-secondary-soft) 0%, var(--color-highlight) 50%, var(--color-card) 100%);
+  position: relative;
+  margin-top: 0.5rem;
+  box-shadow:
+    0 12px 30px rgba(23, 26, 45, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.about__quote::before {
+  content: '"';
+  position: absolute;
+  top: -0.4rem;
+  left: 0.9rem;
+  font-family: var(--font-serif);
+  font-size: 2.8rem;
+  color: var(--color-accent);
+  opacity: 0.7;
+  line-height: 1;
+}
+
+.about__quote p {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-body);
+}
+
+/* ---- Column 2: Middle Lanyard Card ---- */
+.about__col-middle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.about__lanyard-anchor {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 320px;
+  perspective: 1000px;
+}
+
+/* Rotating Assembly Pivot (TOP CENTER 50% 0%) */
+.about__lanyard-assembly {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  transform-origin: 50% 0%;
+  touch-action: pan-y;
+  user-select: none;
+  cursor: grab;
+  will-change: transform;
+}
+
+.about__lanyard-assembly:active {
+  cursor: grabbing;
+}
+
+/* Extended Lanyard Fabric Strap */
+.about__lanyard-strap-top {
+  width: 30px;
+  height: 60px;
+  background: var(--color-navy);
+  position: relative;
+  box-shadow: 0 4px 12px rgba(37, 42, 74, 0.18);
+  border-radius: 2px 2px 0 0;
+  overflow: hidden;
+}
+
+.about__lanyard-strap-inner {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(251, 243, 224, 0.08) 3px,
+    rgba(251, 243, 224, 0.08) 6px
+  );
+}
+
+/* Metallic Hardware Connector */
+.about__lanyard-hardware {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 5;
+  margin-top: -8px;
+  margin-bottom: -10px;
+}
+
+.about__lanyard-ring {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 3px solid var(--color-value);
+  background: var(--color-background);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.about__lanyard-clip-metal {
+  width: 36px;
+  height: 14px;
+  background: linear-gradient(180deg, var(--color-navy-secondary) 0%, var(--color-navy) 100%);
+  border-radius: 3px;
+  box-shadow: 0 3px 8px rgba(37, 42, 74, 0.25);
+}
+
+/* ID Badge Slot Hole */
+.about__id-badge-hole {
+  width: 36px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--color-background);
+  margin: 0.65rem auto -0.25rem;
+  border: 1px solid var(--color-border);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+/* ── 3D Flip Card ── */
+.about__id-flip {
+  width: 100%;
+  min-height: 360px;
+  perspective: 1400px;
+  cursor: pointer;
+  outline: none;
+}
+
+.about__id-flip:focus-visible {
+  outline: 2px solid var(--color-navy);
+  outline-offset: 4px;
+  border-radius: var(--radius-lg);
+}
+
+.about__id-flip-inner {
+  position: relative;
+  width: 100%;
+  min-height: 360px;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.about__id-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.about__id-face--front {
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+.about__id-face--back {
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+.about__id-flip.is-flipped .about__id-face--front {
+  z-index: 1;
+}
+
+.about__id-flip.is-flipped .about__id-face--back {
+  z-index: 2;
+}
+
+/* ID Card Component */
+.about__id-card {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 20px 45px rgba(37, 42, 74, 0.12);
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+  transition: box-shadow 0.4s ease;
+}
+
+.about__id-flip:hover .about__id-card {
+  box-shadow: 0 28px 55px rgba(37, 42, 74, 0.18);
+}
+
+.about__id-card-header--back {
+  background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-secondary) 100%);
+}
+
+.about__id-card-body--back {
+  flex: 1;
+  justify-content: space-between;
+}
+
+.about__id-back-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.about__id-back-item {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--color-value);
+  line-height: 1.35;
+}
+
+.about__id-back-item svg {
+  color: var(--color-navy);
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.about__id-location svg,
+.about__id-flip-hint svg,
+.about__id-back-cta svg {
+  flex-shrink: 0;
+  color: inherit;
+}
+
+.about__id-back-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--color-navy);
+  text-decoration: none;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.about__id-back-cta:hover {
+  background: var(--color-navy);
+  color: var(--color-light-text);
+  border-color: var(--color-navy);
+  transform: translateY(-2px);
+}
+
+.about__id-flip-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-top: 0.15rem;
+}
+
+.about__id-card-header {
+  background: var(--color-navy);
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.about__id-card-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-light-text);
+  opacity: 0.9;
+}
+
+.about__id-card-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-light-text);
+  box-shadow: 0 0 6px rgba(248, 245, 234, 0.8);
+}
+
+.about__id-card-body {
+  background: var(--color-card);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.about__id-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-sm);
+  background: var(--color-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.4rem;
+  color: var(--color-light-text);
+  font-weight: 400;
+  flex-shrink: 0;
+}
+
+.about__id-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.about__id-name {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--color-navy);
+}
+
+.about__id-title {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--color-body);
+  text-transform: uppercase;
+}
+
+.about__id-location {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  color: var(--color-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.about__id-divider {
+  height: 1px;
+  background: var(--color-border);
+}
+
+.about__id-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.about__id-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.about__id-meta-label {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.about__id-meta-value {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--color-value);
+}
+
+.about__id-barcode {
+  height: 18px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-navy) 0px,
+    var(--color-navy) 2px,
+    transparent 2px,
+    transparent 5px,
+    var(--color-navy) 5px,
+    var(--color-navy) 6px,
+    transparent 6px,
+    transparent 9px,
+    var(--color-navy) 9px,
+    var(--color-navy) 12px,
+    transparent 12px,
+    transparent 14px
+  );
+  opacity: 0.22;
+  border-radius: 1px;
+  margin-top: 0.25rem;
+}
+
+/* ---- Column 3: Right Quick Facts ---- */
+.about__col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.about__facts {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.about__facts-title {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: 0.85rem;
+}
+
+.about__fact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--color-border);
+  transition: padding-left var(--duration-base) var(--ease-smooth);
+}
+
+.about__fact--3d {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.about__fact-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.about__fact:first-of-type {
+  border-top: 1px solid var(--color-border);
+}
+
+.about__fact:hover {
+  padding-left: 0.4rem;
+}
+
+.about__fact-key {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.about__fact-value {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--color-value);
+  line-height: 1.4;
+}
+
+/* ---- Responsive Fallback ---- */
+@media (max-width: 1080px) {
+  .about__inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+
+  .about__col-middle {
+    grid-column: span 2;
+    order: -1;
+    margin-bottom: 0.5rem;
+  }
+
+  .about__lanyard-anchor {
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about__inner {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+
+  .about__col-middle {
+    grid-column: span 1;
+  }
+
+  .about__heading h2 {
+    font-size: clamp(2.1rem, 9vw, 3.2rem);
+  }
+
+  .about__intro,
+  .about__quote p {
+    font-size: 0.95rem;
+  }
+
+  .about__quote {
+    padding: 1.15rem 1.2rem;
+  }
+
+  .about__lanyard-anchor {
+    max-width: min(280px, 86vw);
+  }
+}
+
+@media (max-width: 480px) {
+  .about__col-left,
+  .about__col-right {
+    gap: 1.25rem;
+  }
+
+  .about__id-card-body {
+    padding: 1rem;
+  }
+}
